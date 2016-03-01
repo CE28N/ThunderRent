@@ -1,0 +1,101 @@
+html, body {
+	margin: 0 auto;
+	font-family: sans-serif;
+	background: url('../img/background.jpg') no-repeat fixed center center;
+	background-size: cover;
+}
+
+a {
+	color: #888;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+h2 {
+	text-align: center;
+	color: #000;
+	text-transform: uppercase;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+h4 {
+	text-align: right;
+	font-weight: normal;
+	color: #000;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+input[type=submit] {
+	width: 100px;
+	background-color: #FFBC00;
+	color: #fff;
+	border: 1px solid #FFCB00;
+	border-radius: 3px;
+	padding: 5px;
+	text-transform: uppercase;
+}
+
+input:hover[type=submit] {
+	background-color: #FFCB00;
+}
+
+#wrap {
+	width: 60%;
+	padding: 20px;
+	background: #fff;
+	border-radius: 5px;
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#navigation {
+	text-align: center;
+	height: 30px;
+	color: #888;
+}
+
+#navigation a {
+	font-size: 14px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #888;
+	text-decoration: none;
+}
+
+#navigation a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+#index {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.photo {
+	float: right;
+}
+
+.info {
+	padding: 10px;
+	height: 20px;
+	border-top: 1px solid #CCC;
+}
+
+.info span {
+	float: left;
+	width: 200px;
+	font-weight: bold;
+}
+
+.submit {
+	padding: 10px;
+	height: 15px;
+}

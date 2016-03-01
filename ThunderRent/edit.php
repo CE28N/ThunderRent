@@ -1,8 +1,6 @@
 <?php
 require_once("include/functions.php");
 checkSession();
-
-$connection = connectDB();
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +11,8 @@ $connection = connectDB();
 </head>
 <?php
 $userID = $_SESSION['userID'];
+
+$connection = connectDB();
 
 $query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
@@ -76,15 +76,28 @@ if (isset($_POST['submit'])){
 		$photoPath = NULL;
 	}
 
-	if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone', photoPath = '$photoPath' WHERE userID = '$userID'")) {
-		echo "
-			<script type='text/javascript'>
-				alert('SUCCESS: Profile updated');
-				window.location.href = 'profile.php?userID=".$userID."';
-			</script>
-		";
+	if ($photoPath == NULL) {
+		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone' WHERE userID = '$userID'")) {
+			echo "
+				<script type='text/javascript'>
+					alert('SUCCESS: Profile updated');
+					window.location.href = 'profile.php?userID=".$userID."';
+				</script>
+			";
+		} else {
+			echo "<script>alert('Error: Please contact server admin')";
+		}
 	} else {
-		die('Error: ' . mysqli_error($connection));
+		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone', photoPath = '$photoPath' WHERE userID = '$userID'")) {
+			echo "
+				<script type='text/javascript'>
+					alert('SUCCESS: Profile updated');
+					window.location.href = 'profile.php?userID=".$userID."';
+				</script>
+			";
+		} else {
+			echo "<script>alert('Error: Please contact server admin')";
+		}
 	}
 }
 ?>

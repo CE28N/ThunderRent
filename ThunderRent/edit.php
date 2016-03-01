@@ -105,15 +105,15 @@ if (isset($_POST['submit'])){
 			<form method="post" enctype="multipart/form-data">
 				<div class="photo"><img src="<?php echo $photoPath; ?>" width="150" height="150" /></div>
 				<div class="info"><span>Username</span><?php echo $_SESSION['username']; ?></div>
-				<div class="info"><span>First Name</span><input type="text" name="firstName" value="<?php echo $firstName; ?>"></div>
-				<div class="info"><span>Last Name</span><input type="text" name="lastName" value="<?php echo $lastName; ?>"></div>
-				<div class="info"><span>Email</span><input type="text" name="userEmail" value="<?php echo $userEmail; ?>"></div>
+				<div class="info"><span>First Name</span><input name="firstName" type="text" value="<?php echo $firstName; ?>"></div>
+				<div class="info"><span>Last Name</span><input name="lastName" type="text" value="<?php echo $lastName; ?>"></div>
+				<div class="info"><span>Email</span><input name="userEmail" type="text" value="<?php echo $userEmail; ?>"></div>
 				<div class="info"><span>Score</span><?php echo $userScore; ?></div>
-				<div class="info"><span>Gender</span><input type="radio" name="userGender" value="M" checked>M <input type="radio" name="userGender" value="F">F</div>
-				<div class="info"><span>Phone</span><input type="text" name="userPhone" value="<?php echo $userPhone; ?>"></div>
+				<div class="info"><span>Gender</span><input name="userGender" type="radio" value="M" checked>M <input name="userGender" type="radio" value="F">F</div>
+				<div class="info"><span>Phone</span><input name="userPhone" type="text" value="<?php echo $userPhone; ?>"></div>
 				<div class="info"><span>Saved Items</span></div>
 				<div class="info"><span>Interested House</span></div>
-				<div class="info"><span>Photo</span><input type="file" name="photoPath" value="" maxlength="255"></div>
+				<div class="info"><span>Photo</span><input name="photoPath" type="file" value="" maxlength="255"></div>
 				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>
 				<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>
 			</form>

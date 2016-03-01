@@ -8,6 +8,15 @@ checkSession();
 	<title>House - ThunderRent</title>
 	<link href="include/css/style.css" rel="stylesheet" type="text/css">
 	<link rel="icon" type="image/png" href="include/img/icon.png">
+	<style>
+		table {
+			margin-top: 10px;
+		}
+
+		table tr td {
+			width: 25%;
+		}
+	</style>
 </head>
 <body>
 	<div id="wrap">
@@ -21,10 +30,24 @@ checkSession();
 
 		<h2>House</h2>
 		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
-		<h4><a href="host.php">Manage Ads</a></h4>
+		Avgerage price: <b>$<?php echo avgPrice(); ?>/ft²</b>
 
-		<div id="index">
-			<!---->
+		<div id="list">
+			<?php
+			$connection = connectDB();
+			$query = mysqli_query($connection, "SELECT houseID, title, district, size FROM house_profile");
+			if (mysqli_num_rows($query) > 0) {
+				echo "<table><tr><th>Title</th><th>District</th><th>Size</th><th>Link</th></tr>";
+				while($row = mysqli_fetch_assoc($query)) {
+					echo "<tr><td>".$row['title']."</td><td>".$row['district']."</td><td>".$row['size']."</td><td><a href='viewHouse.php?houseID=".$row['houseID']."'>View</a></td></tr>";
+				}
+				echo "</table>";
+
+				echo "<div class='submit'><a href='host.php'>Manage Ads</a></div>";
+			} else {
+				echo "0 results";
+			}
+			?>
 		</div>
 	</div>
 </body>

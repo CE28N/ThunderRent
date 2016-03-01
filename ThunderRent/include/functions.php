@@ -158,4 +158,13 @@ function showDistrict() {
 		<option value='Islands'>Islands</option>
 	</select>";
 }
+
+function avgPrice() {
+	$connection = connectDB();
+
+	$query = mysqli_query($connection, "SELECT AVG(price)/AVG(size) AS avg FROM house_profile");
+	$row = mysqli_fetch_assoc($query);
+
+	return round($row['avg'], 2);
+}
 ?>

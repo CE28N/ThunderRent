@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 			background-size: cover;
 		}
 
-		#register {
+		#changePassword {
 			width: 320px;
 			padding: 20px;
 			background: #fff;
@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-	<div id="register">
+	<div id="changePassword">
 		<form method="post">
 			<h2>Change Password</h2>
 			<h4>User: <?php echo $_SESSION['userName']; ?></h4>

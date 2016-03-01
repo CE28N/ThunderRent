@@ -60,7 +60,7 @@ if (mysqli_num_rows($query) == 0) {
 		<h2>Post Review</h2>
 		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 
-		<div id="edit">
+		<div id="postReview">
 			<form method="post">
 				<div class="submit">Please enter the detail of the review you want to post:</div>
 				<div class="info"><span>Target</span><a href="profile.php?userID=<?php echo $targetID; ?>"><?php echo $targetName; ?></a></div>

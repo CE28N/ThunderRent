@@ -8,6 +8,11 @@ checkSession();
 	<title>Review - ThunderRent</title>
 	<link href="include/css/style.css" rel="stylesheet" type="text/css">
 	<link rel="icon" type="image/png" href="include/img/icon.png">
+	<style>
+		table tr td {
+			width: 33.33%;
+		}
+	</style>
 </head>
 <body>
 	<div id="wrap">
@@ -30,9 +35,9 @@ checkSession();
 			$connection = connectDB();
 			$query = mysqli_query($connection, "SELECT ur.userID, userName, rating, comment FROM user_account ua INNER JOIN user_review ur ON ua.userID = ur.userID WHERE targetID = '$targetID'");
 			if (mysqli_num_rows($query) > 0) {
-				echo "<table><tr><th>By User</th><th>Rating</th><th>Comment</th><th></th></tr>";
+				echo "<table><tr><th>By User</th><th>Rating</th><th>Comment</th></tr>";
 				while($row = mysqli_fetch_assoc($query)) {
-					echo "<tr><td><a href='profile.php?userID=".$row['userID']."'>".$row['userName']."</a></td><td>".$row['rating']."</td><td>".$row['comment']."</td><td></td></tr>";
+					echo "<tr><td><a href='profile.php?userID=".$row['userID']."'>".$row['userName']."</a></td><td>".$row['rating']."</td><td>".$row['comment']."</td></tr>";
 				}
 				echo "</table>";
 			} else {

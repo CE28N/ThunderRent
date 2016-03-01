@@ -184,9 +184,8 @@ if (mysqli_num_rows($query) == 0) {
 
 		<h2>Host</h2>
 		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
-		<h4><a href="house.php">View houses</a></h4>
 
-		<div id="index">
+		<div id="house">
 			<form method="post" enctype="multipart/form-data">
 				<div class="submit">
 				<?php
@@ -210,7 +209,7 @@ if (mysqli_num_rows($query) == 0) {
 				}
 				?>
 				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>
-				<div class="submit"><a href="house.php">View houses</a></div>
+				<div class="submit"><a href="house.php">Back to house list</a></div>
 			</form>
 		</div>
 	</div>

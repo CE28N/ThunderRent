@@ -14,11 +14,11 @@ $connection = connectDB();
 <?php
 $userID = $_GET['userID'];
 
-$query = mysqli_query($connection, "SELECT userName FROM user_account where userID = '$userID'");
+$query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
 $userName = $row['userName'];
 
-$query = mysqli_query($connection, "SELECT * FROM user_profile where userID = '$userID'");
+$query = mysqli_query($connection, "SELECT * FROM user_profile WHERE userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];

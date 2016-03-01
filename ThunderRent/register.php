@@ -108,10 +108,10 @@ if (isset($_POST['submit'])) {
 	<div id="register">
 		<form method="post">
 			<h2>Sign Up</h2>
-			<input type="text" name="username" placeholder="Username">
-			<input type="password" name="password" placeholder="Password">
-			<input type="password" name="confirmPassword" placeholder="Confirm Password">
-			<input type="submit" name="submit" value="Submit">
+			<input name="username" type="text" placeholder="Username">
+			<input name="password" type="password" placeholder="Password">
+			<input name="confirmPassword" type="password" placeholder="Confirm Password">
+			<input name="submit" type="submit" value="Submit">
 			<span><?php echo $error; ?></span>
 			<h2><a href="login.php">Sign in</a></h2>
 		</form>

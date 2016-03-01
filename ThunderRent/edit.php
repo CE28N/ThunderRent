@@ -14,11 +14,11 @@ $connection = connectDB();
 <?php
 $userID = $_SESSION['userID'];
 
-$query = mysqli_query($connection, "SELECT userName FROM user_account where userID = '$userID'");
+$query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
 $userName = $row['userName'];
 
-$query = mysqli_query($connection, "SELECT * FROM user_profile where userID = '$userID'");
+$query = mysqli_query($connection, "SELECT * FROM user_profile WHERE userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
@@ -102,7 +102,7 @@ if (isset($_POST['submit'])){
 		<h4>Welcome back: <b><?php echo $_SESSION['username']; ?></b></h4>
 
 		<div id="edit">
-			<form method="post" id="update" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data">
 				<div class="photo"><img src="<?php echo $photoPath; ?>" width="150" height="150" /></div>
 				<div class="info"><span>Username</span><?php echo $_SESSION['username']; ?></div>
 				<div class="info"><span>First Name</span><input type="text" name="firstName" value="<?php echo $firstName; ?>"></div>
@@ -114,8 +114,8 @@ if (isset($_POST['submit'])){
 				<div class="info"><span>Saved Items</span></div>
 				<div class="info"><span>Interested House</span></div>
 				<div class="info"><span>Photo</span><input type="file" name="photoPath" value="" maxlength="255"></div>
-				<div class="submit"><input type="submit" name="submit" value="Update"></p></div>
-				<div class="submit"><a href="profile.php">Back to profile</a></div>
+				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>
+				<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>
 			</form>
 		</div>
 	</div>

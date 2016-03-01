@@ -58,7 +58,7 @@ if (mysqli_num_rows($query) == 0) {
 		</div>
 
 		<h2>Post Review</h2>
-		<h4>Welcome back: <b><?php echo $_SESSION['username']; ?></b></h4>
+		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 
 		<div id="edit">
 			<form method="post">

@@ -20,10 +20,10 @@ checkSession();
 		</div>
 
 		<h2>Thunder Rent</h2>
-		<h4>Welcome back: <b><?php echo $_SESSION['username']; ?></b></h4>
+		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 
 		<div id="index">
-			Welcome to ThunderRent, <b><?php echo $_SESSION['username']; ?></b>! You can view, search or post any house for rent in this website. You can also use our built in functions to find your renting partner.
+			Welcome to ThunderRent, <b><?php echo $_SESSION['userName']; ?></b>! You can view, search or post any house for rent in this website. You can also use our built in functions to find your renting partner.
 			<br><br>
 			Try it now!
 		</div>

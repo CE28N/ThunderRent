@@ -99,12 +99,12 @@ if (isset($_POST['submit'])){
 		</div>
 
 		<h2>Edit Profile</h2>
-		<h4>Welcome back: <b><?php echo $_SESSION['username']; ?></b></h4>
+		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 
 		<div id="edit">
 			<form method="post" enctype="multipart/form-data">
 				<div class="photo"><img src="<?php echo $photoPath; ?>" width="150" height="150" /></div>
-				<div class="info"><span>Username</span><?php echo $_SESSION['username']; ?></div>
+				<div class="info"><span>Username</span><?php echo $_SESSION['userName']; ?></div>
 				<div class="info"><span>First Name</span><input name="firstName" type="text" value="<?php echo $firstName; ?>"></div>
 				<div class="info"><span>Last Name</span><input name="lastName" type="text" value="<?php echo $lastName; ?>"></div>
 				<div class="info"><span>Email</span><input name="userEmail" type="text" value="<?php echo $userEmail; ?>"></div>

@@ -41,7 +41,7 @@ $interested = unserialize($row['interested']);
 		</div>
 
 		<h2>Profile</h2>
-		<h4>Welcome back: <b><?php echo $_SESSION['username']; ?></b></h4>
+		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 		<?php
 		if ($userID == $_SESSION['userID']) {
 			echo '<h4><a href="edit.php?userID='.$_SESSION['userID'].'">Edit profile</a></h4>';

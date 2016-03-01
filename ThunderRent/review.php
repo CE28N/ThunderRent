@@ -22,7 +22,7 @@ $connection = connectDB();
 		</div>
 
 		<h2>Review</h2>
-		<h4>Welcome back: <b><?php echo $_SESSION['username']; ?></b></h4>
+		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 
 		<div id="list">
 			<?php

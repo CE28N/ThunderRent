@@ -4,7 +4,7 @@ require_once("include/functions.php");
 $error = '';
 
 session_start();
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['userName'])) {
 	header('location: index.php');
 }
 

@@ -45,6 +45,11 @@ input:hover[type=submit] {
 	background-color: #FFCB00;
 }
 
+table {
+	width: 100%;
+	text-align: center;
+}
+
 #wrap {
 	width: 60%;
 	padding: 20px;

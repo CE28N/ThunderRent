@@ -1,8 +1,6 @@
 <?php
 require_once("include/functions.php");
 checkSession();
-
-$connection = connectDB();
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +11,8 @@ $connection = connectDB();
 </head>
 <?php
 $userID = $_GET['userID'];
+
+$connection = connectDB();
 
 $query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$userID'");
 $row = mysqli_fetch_assoc($query);

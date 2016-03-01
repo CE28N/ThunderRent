@@ -1,8 +1,6 @@
 <?php
 require_once("include/functions.php");
 checkSession();
-
-$connection = connectDB();
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +12,8 @@ $connection = connectDB();
 <?php
 $userID = $_SESSION['userID'];
 $targetID = $_GET['targetID'];
+
+$connection = connectDB();
 
 $query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$targetID' LIMIT 1");
 $row = mysqli_fetch_assoc($query);

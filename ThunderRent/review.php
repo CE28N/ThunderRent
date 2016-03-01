@@ -1,8 +1,6 @@
 <?php
 require_once("include/functions.php");
 checkSession();
-
-$connection = connectDB();
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,8 +27,8 @@ $connection = connectDB();
 			$targetID = $_GET['userID'];
 			$array = array();
 
-			$query = mysqli_query($connection, "SELECT ur.
-userID, userName, rating, comment FROM user_account ua INNER JOIN user_review ur ON ua.userID = ur.userID WHERE targetID = '$targetID'");
+			$connection = connectDB();
+			$query = mysqli_query($connection, "SELECT ur.userID, userName, rating, comment FROM user_account ua INNER JOIN user_review ur ON ua.userID = ur.userID WHERE targetID = '$targetID'");
 			if (mysqli_num_rows($query) > 0) {
 				echo "<table><tr><th>By User</th><th>Rating</th><th>Comment</th><th></th></tr>";
 				while($row = mysqli_fetch_assoc($query)) {

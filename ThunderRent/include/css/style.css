@@ -84,6 +84,10 @@ table {
 	margin-right: 20px;
 }
 
+#house img {
+	margin-left: 10px;
+}
+
 .photo {
 	float: right;
 }
@@ -102,5 +106,12 @@ table {
 
 .submit {
 	padding: 10px;
+	height: 15px;
+}
+
+.link {
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left: 10px;
 	height: 15px;
 }

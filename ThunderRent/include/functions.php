@@ -83,4 +83,38 @@ function checkSession() {
 		header('location: login.php');
 	}
 }
+
+function postReview($userID, $targetID, $rating, $comment) {
+	$connection = connectDB();
+
+	$comment = mysqli_real_escape_string($connection, $comment);
+	if (mysqli_query($connection, "INSERT INTO user_review (userID, targetID, rating, comment) VALUES ('$userID', '$targetID', '$rating', '$comment')")) {
+		$query = mysqli_query($connection, "SELECT SUM(rating) AS score FROM user_review WHERE targetID = '$targetID'");
+		$row = mysqli_fetch_assoc($query);
+		$score = $row['score'];
+		if (mysqli_query($connection, "UPDATE user_profile SET userScore = '$score' WHERE userID = '$targetID'")) {
+			return true;
+		}
+	}
+
+	mysqli_close($connection);
+	return false;
+}
+
+function updateReview($reviewID, $targetID, $rating, $comment) {
+	$connection = connectDB();
+
+	$comment = mysqli_real_escape_string($connection, $comment);
+	if (mysqli_query($connection, "UPDATE user_review SET rating = '$rating', comment = '$comment' WHERE reviewID = '$reviewID'")) {
+		$query = mysqli_query($connection, "SELECT SUM(rating) AS score FROM user_review WHERE targetID = '$targetID'");
+		$row = mysqli_fetch_assoc($query);
+		$score = $row['score'];
+		if (mysqli_query($connection, "UPDATE user_profile SET userScore = '$score' WHERE userID = '$targetID'")) {
+			return true;
+		}
+	}
+
+	mysqli_close($connection);
+	return false;
+}
 ?>

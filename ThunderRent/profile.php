@@ -36,7 +36,7 @@ $interested = unserialize($row['interested']);
 			<a href="index.php">Home</a>|
 			<a href="house.php">Housing</a>|
 			<a href="mail.php">Mail Box</a>|
-			<a href="profile.php">Profile</a>|
+			<a href="<?php echo 'profile.php?userID='.$_SESSION['userID']; ?>">Profile</a>|
 			<a href="logout.php">Log Out</a>
 		</div>
 

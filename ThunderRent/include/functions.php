@@ -1,6 +1,13 @@
 <?php
 require_once("variables.php");
 
+function checkSession() {
+	session_start();
+	if (!isset($_SESSION['userName'])) {
+		header('location: login.php');
+	}
+}
+
 function connectDB() {
 	return mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 }
@@ -95,13 +102,6 @@ function changePassword($userID, $oldPassword, $newPassword) {
 	}
 }
 
-function checkSession() {
-	session_start();
-	if (!isset($_SESSION['userName'])) {
-		header('location: login.php');
-	}
-}
-
 function postReview($userID, $targetID, $rating, $comment) {
 	$connection = connectDB();
 
@@ -134,5 +134,28 @@ function updateReview($reviewID, $targetID, $rating, $comment) {
 
 	mysqli_close($connection);
 	return false;
+}
+
+function showDistrict() {
+	return "<select name='district'>
+		<option value='Central and Western'>Central and Western</option>
+		<option value='Wan Chai'>Wan Chai</option>
+		<option value='Eastern'>Eastern</option>
+		<option value='Southern'>Southern</option>
+		<option value='Yau Tsim Mong'>Yau Tsim Mong</option>
+		<option value='Sham Shui Po'>Sham Shui Po</option>
+		<option value='Kowloon City'>Kowloon City</option>
+		<option value='Wong Tai Sin'>Wong Tai Sin</option>
+		<option value='Kwun Tong'>Kwun Tong</option>
+		<option value='Kwai Tsing'>Kwai Tsing</option>
+		<option value='Tsuen Wan'>Tsuen Wan</option>
+		<option value='Tuen Mun'>Tuen Mun</option>
+		<option value='Yuen Long'>Yuen Long</option>
+		<option value='North'>North</option>
+		<option value='Tai Po'>Tai Po</option>
+		<option value='Sha Tin'>Sha Tin</option>
+		<option value='Sai Kung'>Sai Kung</option>
+		<option value='Islands'>Islands</option>
+	</select>";
 }
 ?>

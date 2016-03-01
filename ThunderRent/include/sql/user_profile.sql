@@ -1,6 +1,6 @@
 /*
 ThunderRent Database - user_profile
-LAST CHANGE 26 Feb, 2016 19:49 HKT
+LAST CHANGE 26 Feb, 2016 21:59 HKT
 */
 
 CREATE TABLE IF NOT EXISTS `user_profile` (

@@ -1,6 +1,6 @@
 /*
 ThunderRent Database - user_review
-LAST CHANGE 26 Feb, 2016 19:49 HKT
+LAST CHANGE 1 Mar, 2016 16:30 HKT
 */
 
 CREATE TABLE IF NOT EXISTS `user_review` (

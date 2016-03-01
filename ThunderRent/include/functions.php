@@ -44,7 +44,7 @@ function login($userName, $userPass) {
 		$dbPass = $row['userPassword'];
 		if (password_verify($userPass, $dbPass)) {
 			$_SESSION['userID'] = $row['userID'];
-			$_SESSION['username'] = $userName;
+			$_SESSION['userName'] = $userName;
 			mysqli_close($connection);
 			return true;
 		} else {
@@ -77,9 +77,27 @@ function register($userName, $userPass) {
 	}
 }
 
+function changePassword($userID, $oldPassword, $newPassword) {
+	$connection = connectDB();
+
+	$query = mysqli_query($connection, "SELECT userPassword FROM user_account WHERE userID = '$userID' LIMIT 1");
+	if (mysqli_num_rows($query) == 1) {
+		$row = mysqli_fetch_assoc($query);
+		$dbPass = $row['userPassword'];
+		if (password_verify($oldPassword, $dbPass)) {
+			$newPassword = bcrypt(mysqli_real_escape_string($connection, $newPassword));
+			mysqli_query($connection, "UPDATE user_account SET userPassword = '$newPassword' WHERE userID = '$userID'");
+			return true;
+		} else {
+			mysqli_close($connection);
+			return false;
+		}
+	}
+}
+
 function checkSession() {
 	session_start();
-	if (!isset($_SESSION['username'])) {
+	if (!isset($_SESSION['userName'])) {
 		header('location: login.php');
 	}
 }

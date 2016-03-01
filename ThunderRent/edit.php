@@ -105,6 +105,7 @@ if (isset($_POST['submit'])){
 			<form method="post" enctype="multipart/form-data">
 				<div class="photo"><img src="<?php echo $photoPath; ?>" width="150" height="150" /></div>
 				<div class="info"><span>Username</span><?php echo $_SESSION['userName']; ?></div>
+				<div class="info"><span>Password</span><a href="changePassword.php">Change</a></div>
 				<div class="info"><span>First Name</span><input name="firstName" type="text" value="<?php echo $firstName; ?>"></div>
 				<div class="info"><span>Last Name</span><input name="lastName" type="text" value="<?php echo $lastName; ?>"></div>
 				<div class="info"><span>Email</span><input name="userEmail" type="text" value="<?php echo $userEmail; ?>"></div>

@@ -200,4 +200,15 @@ function deleteSaved($userID) {
 		return false;
 	}
 }
+
+function send($senderID, $receiverID, $message) {
+	$connection = connectDB();
+
+	if (mysqli_query($connection, "INSERT INTO user_message (senderID, receiverID, message) VALUES ('$senderID', '$receiverID', '$message')")) {
+		return true;
+	} else {
+		mysqli_close($connection);
+		return false;
+	}
+}
 ?>

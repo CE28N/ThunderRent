@@ -68,9 +68,9 @@ $interested = $row['interested'];
 			<div class="info"><span>Score</span><?php echo $userScore; ?></div>
 			<div class="info"><span>Gender</span><?php echo $userGender; ?></div>
 			<div class="info"><span>Phone</span><?php echo $userPhone; ?></div>
-			<div class="info"><span>Saved Item</span>
 			<?php
 			if ($userID == $_SESSION['userID']) {
+				echo '<div class="info"><span>Saved Item</span>';
 				if ($savedItems != NULL) {
 					echo showSaved($userID).' | <a href="profile.php?deleteSaved=y">Delete</a></div>';
 				} else {
@@ -92,6 +92,7 @@ $interested = $row['interested'];
 						<span>Reviews</span><a href="review.php?type=user&targetID='.$userID.'">View</a> | <a href="postReview.php?type=user&targetID='.$userID.'">Post</a>
 					</div>
 				';
+				echo '<div class="info"><span>Private Message</span><a href="sendMail.php?receiverID='.$userID.'">Send</a></div>';
 			}
 			?>
 		</div>

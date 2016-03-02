@@ -14,12 +14,9 @@ $userID = $_GET['userID'];
 
 $connection = connectDB();
 
-$query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$userID'");
+$query = mysqli_query($connection, "SELECT * FROM ((SELECT userID, userName FROM user_account) AS ua INNER JOIN (SELECT * FROM user_profile) AS up ON ua.userID = up.userID) WHERE ua.userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
 $userName = $row['userName'];
-
-$query = mysqli_query($connection, "SELECT * FROM user_profile WHERE userID = '$userID'");
-$row = mysqli_fetch_assoc($query);
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
 $userEmail = $row['userEmail'];
@@ -70,7 +67,7 @@ $interested = unserialize($row['interested']);
 			} else {
 				echo '
 					<div class="info">
-						<span>Reviews</span><a href="review.php?userID='.$userID.'">View</a> | <a href="postReview.php?targetID='.$userID.'">Post</a>
+						<span>Reviews</span><a href="review.php?userID='.$userID.'">View</a> | <a href="postReview.php?type=user&targetID='.$userID.'">Post</a>
 					</div>
 				';
 			}

@@ -14,12 +14,9 @@ $userID = $_SESSION['userID'];
 
 $connection = connectDB();
 
-$query = mysqli_query($connection, "SELECT userName FROM user_account WHERE userID = '$userID'");
+$query = mysqli_query($connection, "SELECT * FROM ((SELECT userID, userName FROM user_account) AS ua INNER JOIN (SELECT * FROM user_profile) AS up ON ua.userID = up.userID) WHERE ua.userID = '$userID'");
 $row = mysqli_fetch_assoc($query);
 $userName = $row['userName'];
-
-$query = mysqli_query($connection, "SELECT * FROM user_profile WHERE userID = '$userID'");
-$row = mysqli_fetch_assoc($query);
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
 $userEmail = $row['userEmail'];

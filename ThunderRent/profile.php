@@ -61,13 +61,13 @@ $interested = unserialize($row['interested']);
 			if ($userID == $_SESSION['userID']) {
 				echo '
 					<div class="info">
-						<span>Reviews</span><a href="review.php?userID='.$userID.'">View</a>
+						<span>Reviews</span><a href="review.php?type=user&targetID='.$userID.'">View</a>
 					</div>
 				';
 			} else {
 				echo '
 					<div class="info">
-						<span>Reviews</span><a href="review.php?userID='.$userID.'">View</a> | <a href="postReview.php?type=user&targetID='.$userID.'">Post</a>
+						<span>Reviews</span><a href="review.php?type=user&targetID='.$userID.'">View</a> | <a href="postReview.php?type=user&targetID='.$userID.'">Post</a>
 					</div>
 				';
 			}

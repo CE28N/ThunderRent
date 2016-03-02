@@ -29,11 +29,12 @@ checkSession();
 
 		<div id="list">
 			<?php
-			$targetID = $_GET['userID'];
+			$targetID = $_GET['targetID'];
+			$reviewType = $_GET['type'];
 			$array = array();
 
 			$connection = connectDB();
-			$query = mysqli_query($connection, "SELECT ur.userID, userName, rating, comment FROM user_account ua INNER JOIN user_review ur ON ua.userID = ur.userID WHERE targetID = '$targetID'");
+			$query = mysqli_query($connection, "SELECT r.userID, userName, rating, comment FROM user_account ua INNER JOIN ".$reviewType."_review r ON ua.userID = r.userID WHERE targetID = '$targetID'");
 			if (mysqli_num_rows($query) > 0) {
 				echo '<table><tr><th>By User</th><th>Rating</th><th>Comment</th></tr>';
 				while($row = mysqli_fetch_assoc($query)) {

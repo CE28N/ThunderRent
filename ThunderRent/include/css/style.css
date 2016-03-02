@@ -115,3 +115,19 @@ table {
 	padding-left: 10px;
 	height: 15px;
 }
+
+.search {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+
+.search form {
+	padding-bottom: 10px;
+	height: 15px;
+}
+
+.search input[type=text] {
+	margin-left: 5px;
+	margin-right: 5px;
+}

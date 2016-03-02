@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 checkSession();
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ $detail = $row['detail'];
 $photoPath = $row['photoPath'];
 
 if (mysqli_num_rows($query) == 0) {
-	$ownerID = "";
+	$ownerID = '';
 	if (isset($_POST['submit'])){
 		$ownerID = $_SESSION['userID'];
 		$title = mysqli_real_escape_string($connection, $_POST['title']);
@@ -39,17 +39,17 @@ if (mysqli_num_rows($query) == 0) {
 			$image_size = $_FILES['photoPath']['size'];
 			$image_type = pathinfo($image_name,PATHINFO_EXTENSION);
 
-			$image_dir = "include/img/house/";
+			$image_dir = 'include/img/house/';
 			$status = 1;
 
 			//Check if empty
 			if ($image_name == '' || $image_size == 0) {
-				echo "<script>alert('Error: File is empty')</script>";
+				echo '<script>alert("Error: File is empty")</script>';
 				$status = 0;
 			}
 			//Allow certain file formats
-			if ($image_type != "bmp" && $image_type != "jpg" && $image_type != "jpeg" && $image_type != "png") {
-				echo "<script>alert('Error: Only .bmp, .jpg, .jpeg and .png are accepted')</script>";
+			if ($image_type != 'bmp' && $image_type != 'jpg' && $image_type != 'jpeg' && $image_type != 'png') {
+				echo '<script>alert("Error: Only .bmp, .jpg, .jpeg and .png are accepted")</script>';
 				$status = 0;
 			}
 
@@ -59,12 +59,12 @@ if (mysqli_num_rows($query) == 0) {
 				$uuid = gen_uuid();
 				$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-				if (move_uploaded_file($image_tmp,"include/img/house/$uuid.$image_type")) {
-					echo "<script>alert('SUCCESS: Image updated')</script>";
+				if (move_uploaded_file($image_tmp,'include/img/house/$uuid.$image_type')) {
+					echo '<script>alert("SUCCESS: Image updated")</script>';
 
-					$photoPath = "include/img/house/$uuid.$image_type";
+					$photoPath = 'include/img/house/$uuid.$image_type';
 				} else {
-					echo "<script>alert('Error: Please contact server admin')";
+					echo '<script>alert("Error: Please contact server admin")';
 				}
 			} else {
 				$photoPath = NULL;
@@ -75,25 +75,25 @@ if (mysqli_num_rows($query) == 0) {
 
 		if ($photoPath == NULL) {
 			if (mysqli_query($connection, "INSERT INTO house_profile (ownerID, title, district, price, size, detail) VALUES ('$ownerID', '$title', '$district', '$price', '$size', '$detail')")) {
-				echo "
-					<script type='text/javascript'>
-						alert('SUCCESS: Ads posted');
-						window.location.href = '';
+				echo '
+					<script type="text/javascript">
+						alert("SUCCESS: Ads posted");
+						window.location.href = "";
 					</script>
-				";
+				';
 			} else {
 				echo "<script>alert('Error: Please contact server admin')";
 			}
 		} else {
 			if (mysqli_query($connection, "INSERT INTO house_profile (ownerID, title, district, price, size, detail, photoPath) VALUES ('$ownerID', '$title', '$district', '$price', '$size', '$detail', '$photoPath')")) {
-				echo "
-					<script type='text/javascript'>
-						alert('SUCCESS: Ads posted');
-						window.location.href = '';
+				echo '
+					<script type="text/javascript">
+						alert("SUCCESS: Ads posted");
+						window.location.href = "";
 					</script>
-				";
+				';
 			} else {
-				echo "<script>alert('Error: Please contact server admin')";
+				echo '<script>alert("Error: Please contact server admin")';
 			}
 		}
 	}
@@ -112,17 +112,17 @@ if (mysqli_num_rows($query) == 0) {
 			$image_size = $_FILES['photoPath']['size'];
 			$image_type = pathinfo($image_name,PATHINFO_EXTENSION);
 
-			$image_dir = "include/img/house/";
+			$image_dir = 'include/img/house/';
 			$status = 1;
 
 			//Check if empty
 			if ($image_name == '' || $image_size == 0) {
-				echo "<script>alert('Error: File is empty')</script>";
+				echo '<script>alert("Error: File is empty")</script>';
 				$status = 0;
 			}
 			//Allow certain file formats
-			if ($image_type != "bmp" && $image_type != "jpg" && $image_type != "jpeg" && $image_type != "png") {
-				echo "<script>alert('Error: Only .bmp, .jpg, .jpeg and .png are accepted')</script>";
+			if ($image_type != 'bmp' && $image_type != 'jpg' && $image_type != 'jpeg' && $image_type != 'png') {
+				echo '<script>alert("Error: Only .bmp, .jpg, .jpeg and .png are accepted")</script>';
 				$status = 0;
 			}
 
@@ -132,12 +132,12 @@ if (mysqli_num_rows($query) == 0) {
 				$uuid = gen_uuid();
 				$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-				if (move_uploaded_file($image_tmp,"include/img/house/$uuid.$image_type")) {
-					echo "<script>alert('SUCCESS: Image updated')</script>";
+				if (move_uploaded_file($image_tmp,'include/img/house/$uuid.$image_type')) {
+					echo '<script>alert("SUCCESS: Image updated")</script>';
 
-					$photoPath = "include/img/house/$uuid.$image_type";
+					$photoPath = 'include/img/house/$uuid.$image_type';
 				} else {
-					echo "<script>alert('Error: Please contact server admin')";
+					echo '<script>alert("Error: Please contact server admin")';
 				}
 			} else {
 				$photoPath = NULL;
@@ -148,25 +148,25 @@ if (mysqli_num_rows($query) == 0) {
 
 		if ($photoPath == NULL) {
 			if (mysqli_query($connection, "UPDATE house_profile SET title = '$title', district = '$district', price = '$price', size = '$size', detail = '$detail' WHERE ownerID = '$ownerID'")) {
-				echo "
-					<script type='text/javascript'>
-						alert('SUCCESS: Ads updated');
-						window.location.href = '';
+				echo '
+					<script type="text/javascript">
+						alert("SUCCESS: Ads updated");
+						window.location.href = "";
 					</script>
-				";
+				';
 			} else {
-				echo "<script>alert('Error: Please contact server admin')";
+				echo '<script>alert("Error: Please contact server admin")';
 			}
 		} else {
 			if (mysqli_query($connection, "UPDATE house_profile SET title = '$title', district = '$district', price = '$price', size = '$size', detail = '$detail', photoPath = '$photoPath' WHERE ownerID = '$ownerID'")) {
-				echo "
-					<script type='text/javascript'>
-						alert('SUCCESS: Ads updated');
-						window.location.href = '';
+				echo '
+					<script type="text/javascript">
+						alert("SUCCESS: Ads updated");
+						window.location.href = "";
 					</script>
-				";
+				';
 			} else {
-				echo "<script>alert('Error: Please contact server admin')";
+				echo '<script>alert("Error: Please contact server admin")';
 			}
 		}
 	}
@@ -190,9 +190,9 @@ if (mysqli_num_rows($query) == 0) {
 				<div class="submit">
 				<?php
 				if (mysqli_num_rows($query) == 0) {
-					echo "Please enter the detail of the house you want to host:";
+					echo 'Please enter the detail of the house you want to host:';
 				} else {
-					echo "Detail of the house you host for lease:";
+					echo 'Detail of the house you host for lease:';
 				} ?>
 				</div>
 				<div class="info"><span>Owner</span><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>"><?php echo $ownerID; ?></a></div>
@@ -205,7 +205,7 @@ if (mysqli_num_rows($query) == 0) {
 				<div class="info"><span>Photo</span><input name="photoPath" type="file" value="" maxlength="255"></div>
 				<?php
 				if ($photoPath != null) {
-					echo "<img src='".$photoPath."' alt='House Image' width='400' height='300' />";
+					echo '<img src="'.$photoPath.'"" alt="House Image" width="400" height="300" />';
 				}
 				?>
 				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>

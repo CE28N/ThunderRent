@@ -42,17 +42,17 @@ if (isset($_POST['submit'])){
 		$image_size = $_FILES['photoPath']['size'];
 		$image_type = pathinfo($image_name,PATHINFO_EXTENSION);
 
-		$image_dir = "include/img/user/";
+		$image_dir = 'include/img/user/';
 		$status = 1;
 
 		//Check if empty
 		if ($image_name == '' || $image_size == 0) {
-			echo "<script>alert('Error: File is empty')</script>";
+			echo '<script>alert("Error: File is empty")</script>';
 			$status = 0;
 		}
 		//Allow certain file formats
-		if ($image_type != "bmp" && $image_type != "jpg" && $image_type != "jpeg" && $image_type != "png") {
-			echo "<script>alert('Error: Only .bmp, .jpg, .jpeg and .png are accepted')</script>";
+		if ($image_type != 'bmp' && $image_type != 'jpg' && $image_type != 'jpeg' && $image_type != 'png') {
+			echo '<script>alert("Error: Only .bmp, .jpg, .jpeg and .png are accepted")</script>';
 			$status = 0;
 		}
 
@@ -62,12 +62,12 @@ if (isset($_POST['submit'])){
 			$uuid = gen_uuid();
 			$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-			if (move_uploaded_file($image_tmp,"include/img/user/$uuid.$image_type")) {
-				echo "<script>alert('SUCCESS: Image updated')</script>";
+			if (move_uploaded_file($image_tmp,'include/img/user/$uuid.$image_type')) {
+				echo '<script>alert("SUCCESS: Image updated")</script>';
 
-				$photoPath = "include/img/user/$uuid.$image_type";
+				$photoPath = 'include/img/user/$uuid.$image_type';
 			} else {
-				echo "<script>alert('Error: Please contact server admin')";
+				echo '<script>alert("Error: Please contact server admin")';
 			}
 		} else {
 			$photoPath = NULL;
@@ -78,25 +78,25 @@ if (isset($_POST['submit'])){
 
 	if ($photoPath == NULL) {
 		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone' WHERE userID = '$userID'")) {
-			echo "
-				<script type='text/javascript'>
-					alert('SUCCESS: Profile updated');
-					window.location.href = 'profile.php?userID=".$userID."';
+			echo '
+				<script type="text/javascript">
+					alert("SUCCESS: Profile updated");
+					window.location.href = "profile.php?userID='.$userID.'";
 				</script>
-			";
+			';
 		} else {
-			echo "<script>alert('Error: Please contact server admin')";
+			echo '<script>alert("Error: Please contact server admin")';
 		}
 	} else {
 		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone', photoPath = '$photoPath' WHERE userID = '$userID'")) {
-			echo "
-				<script type='text/javascript'>
-					alert('SUCCESS: Profile updated');
-					window.location.href = 'profile.php?userID=".$userID."';
+			echo '
+				<script type="text/javascript">
+					alert("SUCCESS: Profile updated");
+					window.location.href = "profile.php?userID='.$userID.'";
 				</script>
-			";
+			';
 		} else {
-			echo "<script>alert('Error: Please contact server admin')";
+			echo '<script>alert("Error: Please contact server admin")';
 		}
 	}
 }

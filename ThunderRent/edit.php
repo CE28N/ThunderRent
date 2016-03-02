@@ -24,8 +24,13 @@ $userScore = $row['userScore'];
 $userGender = $row['userGender'];
 $userPhone = $row['userPhone'];
 $photoPath = $row['photoPath'];
-$savedItems = unserialize($row['savedItems']);
-$interested = unserialize($row['interested']);
+$savedItems = $row['savedItems'];
+$interested = $row['interested'];
+
+$query = mysqli_query($connection, "SELECT houseID AS savedID, title AS savedName FROM ((SELECT savedItems FROM user_profile WHERE userID = '$userID' LIMIT 1) AS up INNER JOIN (SELECT houseID, title FROM house_profile) AS hp ON up.savedItems = hp.houseID)");
+$row = mysqli_fetch_assoc($query);
+$savedID = $row['savedID'];
+$savedName = $row['savedName'];
 
 if (isset($_POST['submit'])){
 	$firstName = mysqli_real_escape_string($connection, $_POST['firstName']);
@@ -33,6 +38,7 @@ if (isset($_POST['submit'])){
 	$userEmail = mysqli_real_escape_string($connection, $_POST['userEmail']);
 	$userGender = mysqli_real_escape_string($connection, $_POST['userGender']);
 	$userPhone = mysqli_real_escape_string($connection, $_POST['userPhone']);
+	$interested = mysqli_real_escape_string($connection, $_POST['interested']);
 
 	if (isset($_FILES['photoPath']) && $_FILES['photoPath']['error'] != UPLOAD_ERR_NO_FILE) {
 		$image_name = $_FILES['photoPath']['name'];
@@ -74,7 +80,7 @@ if (isset($_POST['submit'])){
 	}
 
 	if ($photoPath == NULL) {
-		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone' WHERE userID = '$userID'")) {
+		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone', interested = '$interested' WHERE userID = '$userID'")) {
 			echo '
 				<script type="text/javascript">
 					alert("SUCCESS: Profile updated");
@@ -85,7 +91,7 @@ if (isset($_POST['submit'])){
 			echo '<script>alert("Error: Please contact server admin")';
 		}
 	} else {
-		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone', photoPath = '$photoPath' WHERE userID = '$userID'")) {
+		if (mysqli_query($connection, "UPDATE user_profile SET firstName = '$firstName', lastName = '$lastName', userEmail = '$userEmail', userPhone = '$userPhone', interested = '$interested', photoPath = '$photoPath' WHERE userID = '$userID'")) {
 			echo '
 				<script type="text/javascript">
 					alert("SUCCESS: Profile updated");
@@ -122,8 +128,8 @@ if (isset($_POST['submit'])){
 				<div class="info"><span>Score</span><?php echo $userScore; ?></div>
 				<div class="info"><span>Gender</span><input name="userGender" type="radio" value="M" checked>M <input name="userGender" type="radio" value="F">F</div>
 				<div class="info"><span>Phone</span><input name="userPhone" type="text" value="<?php echo $userPhone; ?>"></div>
-				<div class="info"><span>Saved Items</span></div>
-				<div class="info"><span>Interested House</span></div>
+				<div class="info"><span>Saved Items</span><a href="viewHouse.php?houseID=<?php echo $savedID; ?>"><?php echo $savedName;?></a></div>
+				<div class="info"><span>Interested House</span><input name="interested" type="text" value="<?php echo $interested; ?>"></div>
 				<div class="info"><span>Photo</span><input name="photoPath" type="file" value="" maxlength="255"></div>
 				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>
 				<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>

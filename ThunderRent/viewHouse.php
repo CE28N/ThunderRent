@@ -15,6 +15,25 @@ checkSession();
 	</style>
 </head>
 <?php
+if (isset($_GET['saveHouse'])) {
+	$userID = $_SESSION['userID'];
+	$houseID = $_GET['saveHouse'];
+
+	$connection = connectDB();
+	$query = mysqli_query($connection, "SELECT savedItems FROM user_profile WHERE userID = '$userID'");
+	$row = mysqli_fetch_assoc($query);
+	$savedItems = $houseID;
+	if (mysqli_query($connection, "UPDATE user_profile SET savedItems = '$savedItems' WHERE userID = '$userID'")) {
+		echo '
+			<script type="text/javascript">
+				alert("SUCCESS: House saved");
+				window.location.href = "viewHouse.php?houseID='.$houseID.'";
+			</script>
+		';
+	} else {
+		echo '<script>alert("Error: Please contact server admin")';
+	}
+}
 $houseID = $_GET['houseID'];
 
 $connection = connectDB();
@@ -59,7 +78,12 @@ $photoPath = $row['photoPath'];
 				echo 'This ads has no photo.</div>';
 			}
 			?>
-			<div class="link"><a href="review.php?type=house&targetID=<?php echo $houseID; ?>">View review</a> | <a href="postReview.php?type=house&targetID=<?php echo $houseID; ?>">Submit review</a> | <a href="">Save as interested</a> | <a href="">Mail to friends</a></div>
+			<div class="link">
+				<a href="review.php?type=house&targetID=<?php echo $houseID; ?>">View review</a> | 
+				<a href="postReview.php?type=house&targetID=<?php echo $houseID; ?>">Submit review</a> | 
+				<a href="viewHouse.php?&saveHouse=<?php echo $houseID; ?>">Save as interested</a> | 
+				<a href="mailto:?subjet=Check this house out!&body=This house looks good: <?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">Mail to friends</a>
+			</div>
 			<div class="submit"><a href="house.php">Back to house list</a></div>
 		</div>
 	</div>

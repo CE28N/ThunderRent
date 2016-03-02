@@ -24,8 +24,13 @@ $userScore = $row['userScore'];
 $userGender = $row['userGender'];
 $userPhone = $row['userPhone'];
 $photoPath = $row['photoPath'];
-$savedItems = unserialize($row['savedItems']);
-$interested = unserialize($row['interested']);
+$savedItems = $row['savedItems'];
+$interested = $row['interested'];
+
+$query = mysqli_query($connection, "SELECT houseID AS savedID, title AS savedName FROM ((SELECT savedItems FROM user_profile WHERE userID = '$userID' LIMIT 1) AS up INNER JOIN (SELECT houseID, title FROM house_profile) AS hp ON up.savedItems = hp.houseID)");
+$row = mysqli_fetch_assoc($query);
+$savedID = $row['savedID'];
+$savedName = $row['savedName'];
 ?>
 <body>
 	<div id="wrap">
@@ -55,8 +60,8 @@ $interested = unserialize($row['interested']);
 			<div class="info"><span>Score</span><?php echo $userScore; ?></div>
 			<div class="info"><span>Gender</span><?php echo $userGender; ?></div>
 			<div class="info"><span>Phone</span><?php echo $userPhone; ?></div>
-			<div class="info"><span>Saved Items</span></div>
-			<div class="info"><span>Interested House</span></div>
+			<div class="info"><span>Saved Items</span><a href="viewHouse.php?houseID=<?php echo $savedID; ?>"><?php echo $savedName;?></a></div>
+			<div class="info"><span>Interested House</span><?php echo $interested;?></div>
 			<?php
 			if ($userID == $_SESSION['userID']) {
 				echo '

@@ -59,7 +59,7 @@ $photoPath = $row['photoPath'];
 				echo 'This ads has no photo.</div>';
 			}
 			?>
-			<div class="link"><a href="">Submit review</a> | <a href="">Save as interested</a> | <a href="">Mail to friends</a></div>
+			<div class="link"><a href="">View review</a> | <a href="postReview.php?type=house&targetID=<?php echo $houseID; ?>">Submit review</a> | <a href="">Save as interested</a> | <a href="">Mail to friends</a></div>
 			<div class="submit"><a href="house.php">Back to house list</a></div>
 		</div>
 	</div>

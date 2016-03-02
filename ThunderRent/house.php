@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 checkSession();
 ?>
 <!DOCTYPE html>
@@ -37,15 +37,15 @@ checkSession();
 			$connection = connectDB();
 			$query = mysqli_query($connection, "SELECT houseID, title, district, size FROM house_profile");
 			if (mysqli_num_rows($query) > 0) {
-				echo "<table><tr><th>Title</th><th>District</th><th>Size</th><th>Link</th></tr>";
+				echo '<table><tr><th>Title</th><th>District</th><th>Size</th><th>Link</th></tr>';
 				while($row = mysqli_fetch_assoc($query)) {
-					echo "<tr><td>".$row['title']."</td><td>".$row['district']."</td><td>".$row['size']."</td><td><a href='viewHouse.php?houseID=".$row['houseID']."'>View</a></td></tr>";
+					echo '<tr><td>'.$row['title'].'</td><td>'.$row['district'].'</td><td>'.$row['size'].'</td><td><a href="viewHouse.php?houseID='.$row['houseID'].'">View</a></td></tr>';
 				}
-				echo "</table>";
+				echo '</table>';
 
-				echo "<div class='submit'><a href='host.php'>Manage Ads</a></div>";
+				echo '<div class="submit"><a href="host.php">Manage Ads</a></div>';
 			} else {
-				echo "0 results";
+				echo '0 results';
 			}
 			?>
 		</div>

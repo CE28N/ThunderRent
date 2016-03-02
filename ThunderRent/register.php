@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 
 $error = '';
 
@@ -10,20 +10,20 @@ if (isset($_SESSION['userName'])) {
 
 if (isset($_POST['submit'])) {
 	if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['confirmPassword'])) {
-		$error = "Error: Please fill in every field";
+		$error = 'Error: Please fill in every field';
 	} else {
 		if (strcmp($_POST['password'], $_POST['confirmPassword'])) {
-			$error = "Error: Password not match";
+			$error = 'Error: Password not match';
 		} else {
 			if (register($_POST['username'], $_POST['password'])) {
-				echo "
-					<script type='text/javascript'>
-						alert('SUCCESS: New account registered');
-						window.location.href = 'login.php';
+				echo '
+					<script type="text/javascript">
+						alert("SUCCESS: New account registered");
+						window.location.href = "login.php";
 					</script>
-				";
+				';
 			} else {
-				$error = "Error: Username in use";
+				$error = 'Error: Username in use';
 			}
 		}
 	}

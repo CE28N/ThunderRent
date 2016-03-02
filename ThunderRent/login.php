@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 
 $error = '';
 
@@ -10,12 +10,12 @@ if (isset($_SESSION['userName'])) {
 
 if (isset($_POST['submit'])) {
 	if (empty($_POST['username']) || empty($_POST['password'])) {
-		$error = "Error: Username or Password is invalid";
+		$error = 'Error: Username or Password is invalid';
 	} else {
 		if (login($_POST['username'], $_POST['password'])) {
 			header('location: index.php');
 		} else {
-			$error = "Error: Wrong Username or Passwords";
+			$error = 'Error: Wrong Username or Passwords';
 		}
 	}
 }

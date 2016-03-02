@@ -1,25 +1,25 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 checkSession();
 
 $error = '';
 
 if (isset($_POST['submit'])) {
 	if (empty($_POST['oldPassword']) || empty($_POST['newPassword']) || empty($_POST['confirmPassword'])) {
-		$error = "Error: Please fill in every field";
+		$error = 'Error: Please fill in every field';
 	} else {
 		if (strcmp($_POST['newPassword'], $_POST['confirmPassword'])) {
-			$error = "Error: New passwords not match";
+			$error = 'Error: New passwords not match';
 		} else {
 			if (changePassword($_SESSION['userID'], $_POST['oldPassword'], $_POST['newPassword'])) {
-				echo "
-					<script type='text/javascript'>
-						alert('SUCCESS: Password updated, please login again.');
-						window.location.href = 'logout.php';
+				echo '
+					<script type="text/javascript">
+						alert("SUCCESS: Password updated, please login again.");
+						window.location.href = "logout.php";
 					</script>
-				";
+				';
 			} else {
-				$error = "Error: Wrong password";
+				$error = 'Error: Wrong password';
 			}
 		}
 	}

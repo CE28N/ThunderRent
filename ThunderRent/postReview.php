@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 checkSession();
 ?>
 <!DOCTYPE html>
@@ -21,15 +21,15 @@ $targetName = $row['userName'];
 
 $query = mysqli_query($connection, "SELECT reviewID, comment FROM user_review WHERE targetID = '$targetID' AND userID = '$userID'");
 if (mysqli_num_rows($query) == 0) {
-	$comment = "";
+	$comment = '';
 	if (isset($_POST['submit'])){
 		postReview($userID, $targetID, $_POST['rating'], $_POST['comment']);
-		echo "
-			<script type='text/javascript'>
-				alert('SUCCESS: Review posted.');
-				window.location.href = 'profile.php?userID=".$userID."';
+		echo '
+			<script type="text/javascript">
+				alert("SUCCESS: Review posted.");
+				window.location.href = "profile.php?userID='.$userID.'";
 			</script>
-		";
+		';
 	}
 } else {
 	$row = mysqli_fetch_assoc($query);
@@ -37,12 +37,12 @@ if (mysqli_num_rows($query) == 0) {
 	$comment = $row['comment'];
 	if (isset($_POST['submit'])){
 		updateReview($reviewID, $targetID, $_POST['rating'], $_POST['comment']);
-		echo "
-			<script type='text/javascript'>
-				alert('SUCCESS: Review updated.');
-				window.location.href = 'profile.php?userID=".$userID."';
+		echo '
+			<script type="text/javascript">
+				alert("SUCCESS: Review updated.");
+				window.location.href = "profile.php?userID='.$userID.'";
 			</script>
-		";
+		';
 	}
 }
 

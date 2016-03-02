@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 checkSession();
 ?>
 <!DOCTYPE html>
@@ -51,10 +51,12 @@ $photoPath = $row['photoPath'];
 			<div class="info"><span>Price</span><?php echo $price; ?></div>
 			<div class="info"><span>Size (ft²)</span><?php echo $size; ?></div>
 			<div class="info"><span>Detail</span><?php echo $detail; ?></div>
-			<div class="info"><span>Photo</span></div>
+			<div class="info"><span>Photo</span>
 			<?php
 			if ($photoPath != null) {
-				echo "<img src='".$photoPath."' alt='House Image' width='400' height='300' />";
+				echo '</div><img src="'.$photoPath.'" alt="House Image" width="400" height="300" />';
+			} else {
+				echo 'This ads has no photo.</div>';
 			}
 			?>
 			<div class="link"><a href="">Submit review</a> | <a href="">Save as interested</a> | <a href="">Mail to friends</a></div>

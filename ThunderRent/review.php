@@ -1,5 +1,5 @@
 <?php
-require_once("include/functions.php");
+require_once('include/functions.php');
 checkSession();
 ?>
 <!DOCTYPE html>
@@ -35,13 +35,13 @@ checkSession();
 			$connection = connectDB();
 			$query = mysqli_query($connection, "SELECT ur.userID, userName, rating, comment FROM user_account ua INNER JOIN user_review ur ON ua.userID = ur.userID WHERE targetID = '$targetID'");
 			if (mysqli_num_rows($query) > 0) {
-				echo "<table><tr><th>By User</th><th>Rating</th><th>Comment</th></tr>";
+				echo '<table><tr><th>By User</th><th>Rating</th><th>Comment</th></tr>';
 				while($row = mysqli_fetch_assoc($query)) {
-					echo "<tr><td><a href='profile.php?userID=".$row['userID']."'>".$row['userName']."</a></td><td>".$row['rating']."</td><td>".$row['comment']."</td></tr>";
+					echo '<tr><td><a href="profile.php?userID='.$row['userID'].'">'.$row['userName'].'</a></td><td>'.$row['rating'].'</td><td>'.$row['comment'].'</td></tr>';
 				}
-				echo "</table>";
+				echo '</table>';
 			} else {
-				echo "0 results";
+				echo '0 results';
 			}
 			?>
 			<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>

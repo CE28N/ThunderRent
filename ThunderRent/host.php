@@ -208,7 +208,7 @@ if (mysqli_num_rows($query) == 0) {
 					echo '<img src="'.$photoPath.'"" alt="House Image" width="400" height="300" />';
 				}
 				?>
-				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>
+				<div class="submit"><input name="submit" type="submit" value="Update"></div>
 				<div class="submit"><a href="house.php">Back to house list</a></div>
 			</form>
 		</div>

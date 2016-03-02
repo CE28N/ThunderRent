@@ -133,7 +133,7 @@ if (isset($_POST['submit'])){
 				?>
 				<div class="info"><span>Interested House</span><input name="interested" type="text" value="<?php echo $interested; ?>"></div>
 				<div class="info"><span>Photo</span><input name="photoPath" type="file" value="" maxlength="255"></div>
-				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>
+				<div class="submit"><input name="submit" type="submit" value="Update"></div>
 				<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>
 			</form>
 		</div>

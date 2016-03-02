@@ -18,8 +18,9 @@ checkSession();
 $houseID = $_GET['houseID'];
 
 $connection = connectDB();
-$query = mysqli_query($connection, "SELECT * FROM house_profile hp INNER JOIN (SELECT userID, userName FROM user_account) AS ua ON hp.ownerID = ua.userID WHERE houseID = 1 LIMIT 1");
+$query = mysqli_query($connection, "SELECT * FROM house_profile hp INNER JOIN (SELECT userID, userName FROM user_account) AS ua ON hp.ownerID = ua.userID WHERE houseID = '$houseID' LIMIT 1");
 $row = mysqli_fetch_assoc($query);
+$ownerID = $row['userID'];
 $ownerName = $row['userName'];
 $title = $row['title'];
 $houseScore = $row['houseScore'];
@@ -43,7 +44,7 @@ $photoPath = $row['photoPath'];
 		<h4>Welcome back: <b><?php echo $_SESSION['userName']; ?></b></h4>
 
 		<div id="house">
-			<div class="info"><span>Owner</span><?php echo $ownerName; ?></div>
+			<div class="info"><span>Owner</span><a href="profile.php?userID=<?php echo $ownerID; ?>"><?php echo $ownerName; ?></a></div>
 			<div class="info"><span>Title</span><?php echo $title; ?></div>
 			<div class="info"><span>Score</span><?php echo $houseScore; ?></div>
 			<div class="info"><span>District</span><?php echo $district; ?></div>
@@ -56,7 +57,7 @@ $photoPath = $row['photoPath'];
 				echo "<img src='".$photoPath."' alt='House Image' width='400' height='300' />";
 			}
 			?>
-			<div class="link"><a href="">Save as interested</a> | <a href="">Mail to friends</a></div>
+			<div class="link"><a href="">Submit review</a> | <a href="">Save as interested</a> | <a href="">Mail to friends</a></div>
 			<div class="submit"><a href="house.php">Back to house list</a></div>
 		</div>
 	</div>

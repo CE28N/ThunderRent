@@ -94,7 +94,6 @@ if (isset($_POST['submit'])) {
 		}
 	</style>
 </head>
-
 <body>
 	<div id="login">
 		<form method="post">

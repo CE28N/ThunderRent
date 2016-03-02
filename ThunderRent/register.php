@@ -103,7 +103,6 @@ if (isset($_POST['submit'])) {
 		}
 	</style>
 </head>
-
 <body>
 	<div id="register">
 		<form method="post">

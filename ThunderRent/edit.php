@@ -27,11 +27,6 @@ $photoPath = $row['photoPath'];
 $savedItems = $row['savedItems'];
 $interested = $row['interested'];
 
-$query = mysqli_query($connection, "SELECT houseID AS savedID, title AS savedName FROM ((SELECT savedItems FROM user_profile WHERE userID = '$userID' LIMIT 1) AS up INNER JOIN (SELECT houseID, title FROM house_profile) AS hp ON up.savedItems = hp.houseID)");
-$row = mysqli_fetch_assoc($query);
-$savedID = $row['savedID'];
-$savedName = $row['savedName'];
-
 if (isset($_POST['submit'])){
 	$firstName = mysqli_real_escape_string($connection, $_POST['firstName']);
 	$lastName = mysqli_real_escape_string($connection, $_POST['lastName']);
@@ -128,7 +123,14 @@ if (isset($_POST['submit'])){
 				<div class="info"><span>Score</span><?php echo $userScore; ?></div>
 				<div class="info"><span>Gender</span><input name="userGender" type="radio" value="M" checked>M <input name="userGender" type="radio" value="F">F</div>
 				<div class="info"><span>Phone</span><input name="userPhone" type="text" value="<?php echo $userPhone; ?>"></div>
-				<div class="info"><span>Saved Items</span><a href="viewHouse.php?houseID=<?php echo $savedID; ?>"><?php echo $savedName;?></a></div>
+				<div class="info"><span>Saved Item</span>
+				<?php
+				if ($savedItems != NULL) {
+					echo showSaved($userID).' | <a href="profile.php?deleteSaved=y">Delete</a></div>';
+				} else {
+					echo showSaved($userID).'</div>';
+				}
+				?>
 				<div class="info"><span>Interested House</span><input name="interested" type="text" value="<?php echo $interested; ?>"></div>
 				<div class="info"><span>Photo</span><input name="photoPath" type="file" value="" maxlength="255"></div>
 				<div class="submit"><input name="submit" type="submit" value="Update"></p></div>

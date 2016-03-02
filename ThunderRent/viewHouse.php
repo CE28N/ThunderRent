@@ -16,24 +16,18 @@ checkSession();
 </head>
 <?php
 if (isset($_GET['saveHouse'])) {
-	$userID = $_SESSION['userID'];
-	$houseID = $_GET['saveHouse'];
-
-	$connection = connectDB();
-	$query = mysqli_query($connection, "SELECT savedItems FROM user_profile WHERE userID = '$userID'");
-	$row = mysqli_fetch_assoc($query);
-	$savedItems = $houseID;
-	if (mysqli_query($connection, "UPDATE user_profile SET savedItems = '$savedItems' WHERE userID = '$userID'")) {
+	if (save($_SESSION['userID'], $_GET['saveHouse'])) {
 		echo '
 			<script type="text/javascript">
 				alert("SUCCESS: House saved");
-				window.location.href = "viewHouse.php?houseID='.$houseID.'";
+				window.location.href = "viewHouse.php?houseID='.$_GET['saveHouse'].'";
 			</script>
 		';
 	} else {
 		echo '<script>alert("Error: Please contact server admin")';
 	}
 }
+
 $houseID = $_GET['houseID'];
 
 $connection = connectDB();

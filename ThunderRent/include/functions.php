@@ -167,4 +167,37 @@ function avgPrice() {
 
 	return round($row['avg'], 2);
 }
+
+function save($userID, $houseID) {
+	$connection = connectDB();
+
+	if (mysqli_query($connection, "UPDATE user_profile SET savedItems = '$houseID' WHERE userID = '$userID'")) {
+		return true;
+	} else {
+		mysqli_close($connection);
+		return false;
+	}
+}
+
+function showSaved($userID) {
+	$connection = connectDB();
+
+	$query = mysqli_query($connection, "SELECT houseID AS savedID, title AS savedName FROM ((SELECT savedItems FROM user_profile WHERE userID = '$userID' LIMIT 1) AS up INNER JOIN (SELECT houseID, title FROM house_profile) AS hp ON up.savedItems = hp.houseID)");
+	$row = mysqli_fetch_assoc($query);
+	$savedID = $row['savedID'];
+	$savedName = $row['savedName'];
+
+	return '<a href="viewHouse.php?houseID='.$savedID.'">'.$savedName.'</a>';
+}
+
+function deleteSaved($userID) {
+	$connection = connectDB();
+
+	if (mysqli_query($connection, "UPDATE user_profile SET savedItems = NULL WHERE userID = '$userID'")) {
+		return true;
+	} else {
+		mysqli_close($connection);
+		return false;
+	}
+}
 ?>

@@ -10,6 +10,19 @@ checkSession();
 	<link rel="icon" type="image/png" href="include/img/icon.png">
 </head>
 <?php
+if (isset($_GET['deleteSaved'])) {
+	if (deleteSaved($_SESSION['userID'])) {
+		echo '
+			<script type="text/javascript">
+				alert("SUCCESS: Saved record deleted");
+				window.location.href = "profile.php?userID='.$_SESSION['userID'].'";
+			</script>
+		';
+	} else {
+		echo '<script>alert("Error: Please contact server admin")';
+	}
+}
+
 $userID = $_GET['userID'];
 
 $connection = connectDB();
@@ -26,11 +39,6 @@ $userPhone = $row['userPhone'];
 $photoPath = $row['photoPath'];
 $savedItems = $row['savedItems'];
 $interested = $row['interested'];
-
-$query = mysqli_query($connection, "SELECT houseID AS savedID, title AS savedName FROM ((SELECT savedItems FROM user_profile WHERE userID = '$userID' LIMIT 1) AS up INNER JOIN (SELECT houseID, title FROM house_profile) AS hp ON up.savedItems = hp.houseID)");
-$row = mysqli_fetch_assoc($query);
-$savedID = $row['savedID'];
-$savedName = $row['savedName'];
 ?>
 <body>
 	<div id="wrap">
@@ -60,7 +68,16 @@ $savedName = $row['savedName'];
 			<div class="info"><span>Score</span><?php echo $userScore; ?></div>
 			<div class="info"><span>Gender</span><?php echo $userGender; ?></div>
 			<div class="info"><span>Phone</span><?php echo $userPhone; ?></div>
-			<div class="info"><span>Saved Items</span><a href="viewHouse.php?houseID=<?php echo $savedID; ?>"><?php echo $savedName;?></a></div>
+			<div class="info"><span>Saved Item</span>
+			<?php
+			if ($userID == $_SESSION['userID']) {
+				if ($savedItems != NULL) {
+					echo showSaved($userID).' | <a href="profile.php?deleteSaved=y">Delete</a></div>';
+				} else {
+					echo showSaved($userID).'</div>';
+				}
+			}
+			?>
 			<div class="info"><span>Interested House</span><?php echo $interested;?></div>
 			<?php
 			if ($userID == $_SESSION['userID']) {

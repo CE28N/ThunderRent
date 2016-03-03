@@ -53,11 +53,10 @@ checkSession();
 					echo '<tr><td>'.$row['title'].'</td><td>'.$row['district'].'</td><td>'.$row['price'].'</td><td><a href="viewHouse.php?houseID='.$row['houseID'].'">View</a></td></tr>';
 				}
 				echo '</table>';
-
-				echo '<div class="submit"><a href="host.php">Manage Ads</a></div>';
 			} else {
-				echo '0 results';
+				echo '<div class="link">0 results</div>';
 			}
+			echo '<div class="submit"><a href="host.php">Manage Ads</a></div>';
 
 			if (isset($_POST['submit'])) {
 				if ($_POST['query'] == NULL) {
@@ -79,7 +78,7 @@ checkSession();
 
 					echo '<div class="submit"><a href="host.php">Manage Ads</a></div>';
 				} else {
-					echo '0 results';
+					echo '<div class="link">0 results</div>';
 				}
 
 				echo '<div class="link"><a href="">Back to list</a></div>';

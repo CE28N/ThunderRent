@@ -59,10 +59,10 @@ if (mysqli_num_rows($query) == 0) {
 				$uuid = gen_uuid();
 				$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-				if (move_uploaded_file($image_tmp,'include/img/house/$uuid.$image_type')) {
+				if (move_uploaded_file($image_tmp,"include/img/house/$uuid.$image_type")) {
 					echo '<script>alert("SUCCESS: Image updated")</script>';
 
-					$photoPath = 'include/img/house/$uuid.$image_type';
+					$photoPath = 'include/img/house/'.$uuid.'.'.$image_type;
 				} else {
 					echo '<script>alert("Error: Please contact server admin")';
 				}
@@ -132,10 +132,10 @@ if (mysqli_num_rows($query) == 0) {
 				$uuid = gen_uuid();
 				$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-				if (move_uploaded_file($image_tmp,'include/img/house/$uuid.$image_type')) {
+				if (move_uploaded_file($image_tmp,"include/img/house/$uuid.$image_type")) {
 					echo '<script>alert("SUCCESS: Image updated")</script>';
 
-					$photoPath = 'include/img/house/$uuid.$image_type';
+					$photoPath = 'include/img/house/'.$uuid.'.'.$image_type;
 				} else {
 					echo '<script>alert("Error: Please contact server admin")';
 				}

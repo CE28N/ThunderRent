@@ -60,10 +60,10 @@ if (isset($_POST['submit'])){
 			$uuid = gen_uuid();
 			$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-			if (move_uploaded_file($image_tmp,'include/img/user/$uuid.$image_type')) {
+			if (move_uploaded_file($image_tmp,"include/img/user/$uuid.$image_type")) {
 				echo '<script>alert("SUCCESS: Image updated")</script>';
 
-				$photoPath = 'include/img/user/$uuid.$image_type';
+				$photoPath = 'include/img/user/'.$uuid.'.'.$image_type;
 			} else {
 				echo '<script>alert("Error: Please contact server admin")';
 			}

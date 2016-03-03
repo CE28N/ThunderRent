@@ -201,10 +201,10 @@ function deleteSaved($userID) {
 	}
 }
 
-function send($senderID, $receiverID, $message) {
+function send($senderID, $receiverID, $title, $message) {
 	$connection = connectDB();
 
-	if (mysqli_query($connection, "INSERT INTO user_message (senderID, receiverID, message) VALUES ('$senderID', '$receiverID', '$message')")) {
+	if (mysqli_query($connection, "INSERT INTO user_message (senderID, receiverID, title, message) VALUES ('$senderID', '$receiverID', '$title', '$message')")) {
 		return true;
 	} else {
 		mysqli_close($connection);

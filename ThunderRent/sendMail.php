@@ -8,6 +8,11 @@ checkSession();
 	<title>Send Mail - ThunderRent</title>
 	<link href="include/css/style.css" rel="stylesheet" type="text/css">
 	<link rel="icon" type="image/png" href="include/img/icon.png">
+	<style>
+		input[type=text] {
+			width: 300px;
+		}
+	</style>
 </head>
 <?php
 $receiverID = $_GET['receiverID'];
@@ -19,7 +24,7 @@ $row = mysqli_fetch_assoc($query);
 $receiverName = $row['userName'];
 
 if (isset($_POST['submit'])) {
-	if (send($_SESSION['userID'], $receiverID, $_POST['message'])) {
+	if (send($_SESSION['userID'], $receiverID, $_POST['title'], $_POST['message'])) {
 		echo '
 			<script type="text/javascript">
 				alert("SUCCESS: Message sent");
@@ -47,6 +52,7 @@ if (isset($_POST['submit'])) {
 		<div id="mail">
 			<form method="post">
 				<div class="info"><span>To:</span><a href="profile.php?userID=<?php echo $receiverID; ?>"><?php echo $receiverName; ?></a></div>
+				<div class="info"><span>Title</span><input name="title" type="text" value=""></div>
 				<div class="message"><span>Message</span><textarea name="message"></textarea></div>
 				<div class="submit"><input name="submit" type="submit" value="Send"></div>
 				<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>

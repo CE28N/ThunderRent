@@ -31,7 +31,7 @@ checkSession();
 			if (mysqli_num_rows($query) > 0) {
 				echo '<table><tr><th width="25%">By User</th><th width="75%">Message</th></tr>';
 				while($row = mysqli_fetch_assoc($query)) {
-					echo '<tr><td>'.$row['senderName'].'</td><td>'.$row['message'].'</td></tr>';
+					echo '<tr><td><a href="profile.php?userID='.$row['senderID'].'">'.$row['senderName'].'</a></td><td>'.$row['message'].'</td></tr>';
 				}
 				echo '</table>';
 			} else {

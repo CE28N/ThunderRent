@@ -5,7 +5,11 @@ $error = '';
 
 session_start();
 if (isset($_SESSION['userName'])) {
-	header('location: index.php');
+	if ($_SESSION['userType'] == 'user') {
+		header('location: index.php');
+	} else {
+		header('location: admin.php');
+	}
 }
 
 if (isset($_POST['submit'])) {

@@ -5,7 +5,11 @@ $error = '';
 
 session_start();
 if (isset($_SESSION['userName'])) {
-	header('location: index.php');
+	if ($_SESSION['userType'] == 'user') {
+		header('location: index.php');
+	} else {
+		header('location: admin.php');
+	}
 }
 
 if (isset($_POST['submit'])) {
@@ -13,7 +17,11 @@ if (isset($_POST['submit'])) {
 		$error = 'Error: Username or Password is invalid';
 	} else {
 		if (login($_POST['username'], $_POST['password'])) {
-			header('location: index.php');
+			if ($_SESSION['userType'] == 'user') {
+				header('location: index.php');
+			} else {
+				header('location: admin.php');
+			}
 		} else {
 			$error = 'Error: Wrong Username or Passwords';
 		}

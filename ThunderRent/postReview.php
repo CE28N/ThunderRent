@@ -109,7 +109,13 @@ if ($reviewType == 'user') {
 				<div class="info"><span>Rating</span><input name="rating" type="radio" value="1">Good <input name="rating" type="radio" value="0" checked>Average <input name="rating" type="radio" value="-1">Bad</div>
 				<div class="info"><span>Comment</span><input name="comment" type="text" value="<?php echo $comment; ?>" maxlength="255"></div>
 				<div class="submit"><input name="submit" type="submit" value="Update"></div>
-				<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>
+				<?php
+				if ($reviewType == 'user') {
+					echo '<div class="submit"><a href="profile.php?userID='.$_SESSION['userID'].'">Back to profile</a></div>';
+				} else {
+					echo '<div class="submit"><a href="viewHouse.php?houseID='.$targetID.'">Back to house</a></div>';
+				}
+				?>
 			</form>
 		</div>
 	</div>

@@ -45,7 +45,7 @@ checkSession();
 				echo '0 results';
 			}
 			?>
-			<div class="submit"><a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>">Back to profile</a></div>
+			<div class="submit"><a href="viewHouse.php?houseID=<?php echo $targetID; ?>">Back to house</a></div>
 		</div>
 	</div>
 </body>

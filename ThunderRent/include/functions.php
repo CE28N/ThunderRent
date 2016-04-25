@@ -5,6 +5,10 @@ function checkSession() {
 	session_start();
 	if (!isset($_SESSION['userName'])) {
 		header('location: login.php');
+	} else {
+		if ($_SESSION['userType'] == 'admin') {
+			header('location: admin.php');
+		}
 	}
 }
 
@@ -45,15 +49,18 @@ function login($userName, $userPass) {
 	$userName = mysqli_real_escape_string($connection, $userName);
 	$userPass = mysqli_real_escape_string($connection, $userPass);
 
-	$query = mysqli_query($connection, "SELECT userID, userPassword FROM user_account WHERE userName = '$userName' LIMIT 1");
+	$query = mysqli_query($connection, "SELECT userID, userPassword, userType FROM user_account WHERE userName = '$userName' LIMIT 1");
 	if (mysqli_num_rows($query) == 1) {
 		$row = mysqli_fetch_assoc($query);
 		$dbPass = $row['userPassword'];
 		if (password_verify($userPass, $dbPass)) {
-			$_SESSION['userID'] = $row['userID'];
-			$_SESSION['userName'] = $userName;
-			mysqli_close($connection);
-			return true;
+			if ($row['userType'] != 'banned') {
+				$_SESSION['userID'] = $row['userID'];
+				$_SESSION['userName'] = $userName;
+				$_SESSION['userType'] = $row['userType'];
+				mysqli_close($connection);
+				return true;
+			}
 		} else {
 			mysqli_close($connection);
 			return false;
@@ -100,6 +107,29 @@ function changePassword($userID, $oldPassword, $newPassword) {
 			return false;
 		}
 	}
+}
+
+function deleteAccount($userID, $userPass) {
+	$connection = connectDB();
+
+	$userPass = mysqli_real_escape_string($connection, $userPass);
+
+	$query = mysqli_query($connection, "SELECT userPassword FROM user_account WHERE userID = '$userID' LIMIT 1");
+	if (mysqli_num_rows($query) == 1) {
+		$row = mysqli_fetch_assoc($query);
+		$dbPass = $row['userPassword'];
+		if (password_verify($userPass, $dbPass)) {
+			//delete scripts
+			mysqli_close($connection);
+			return true;
+		} else {
+			mysqli_close($connection);
+			return false;
+		}
+	}
+
+	mysqli_close($connection);
+	return false;
 }
 
 function postReview($userID, $targetID, $rating, $comment, $type) {

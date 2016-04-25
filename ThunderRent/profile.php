@@ -61,7 +61,6 @@ $interested = $row['interested'];
 		<div id="profile">
 			<div class="photo"><img src="<?php echo $photoPath; ?>" width="150" height="150" /></div>
 			<div class="info"><span>Username</span><?php echo $userName; ?></div>
-			<div class="info"><span>Password</span><a href="changePassword.php">Change</a></div>
 			<div class="info"><span>First Name</span><?php echo $firstName; ?></div>
 			<div class="info"><span>Last Name</span><?php echo $lastName; ?></div>
 			<div class="info"><span>Email</span><?php echo $userEmail; ?></div>

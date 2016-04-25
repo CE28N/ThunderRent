@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
 			echo '
 				<script type="text/javascript">
 					alert("SUCCESS: Account deleted");
-					window.location.href = "login.php";
+					window.location.href = "logout.php";
 				</script>
 			';
 		} else {

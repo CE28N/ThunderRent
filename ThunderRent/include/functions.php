@@ -119,7 +119,34 @@ function deleteAccount($userID, $userPass) {
 		$row = mysqli_fetch_assoc($query);
 		$dbPass = $row['userPassword'];
 		if (password_verify($userPass, $dbPass)) {
-			//delete scripts
+			mysqli_query($connection, "DELETE FROM user_profile WHERE userID = '$userID'");
+			mysqli_query($connection, "DELETE FROM user_review WHERE userID OR targetID = '$userID'");
+			mysqli_query($connection, "DELETE FROM user_message WHERE senderID = '$userID' OR receiverID = '$userID'");
+			mysqli_query($connection, "DELETE FROM house_profile WHERE ownerID = '$userID'");
+			mysqli_query($connection, "DELETE FROM house_review WHERE userID OR targetID = '$userID'");
+			mysqli_query($connection, "DELETE FROM user_account WHERE userID = '$userID'");
+
+			$query = mysqli_query($connection, "SELECT COUNT(*) AS count FROM user_profile");
+			$row = mysqli_fetch_assoc($query);
+			$countUser = $row['count'];
+			$query = mysqli_query($connection, "SELECT COUNT(*) AS count FROM house_profile");
+			$row = mysqli_fetch_assoc($query);
+			$countHouse = $row['count'];
+
+			for ($i=1; $i<=$countUser; $i++) {
+				$query = mysqli_query($connection, "SELECT SUM(rating) AS score FROM user_review WHERE targetID = '$i'");
+				$row = mysqli_fetch_assoc($query);
+				$score = $row['score'];
+				mysqli_query($connection, "UPDATE user_profile SET userScore = '$score' WHERE userID = '$i'");
+			}
+
+			for ($i=1; $i<=$countHouse; $i++) {
+				$query = mysqli_query($connection, "SELECT SUM(rating) AS score FROM house_review WHERE targetID = '$i'");
+				$row = mysqli_fetch_assoc($query);
+				$score = $row['score'];
+				mysqli_query($connection, "UPDATE house_profile SET houseScore = '$score' WHERE houseID = '$i'");
+			}
+
 			mysqli_close($connection);
 			return true;
 		} else {

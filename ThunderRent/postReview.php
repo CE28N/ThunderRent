@@ -29,7 +29,7 @@ if ($reviewType == 'user') {
 			echo '
 				<script type="text/javascript">
 					alert("SUCCESS: Review posted.");
-					window.location.href = "profile.php?userID='.$userID.'";
+					window.location.href = "profile.php?userID='.$targetID.'";
 				</script>
 			';
 		}
@@ -42,7 +42,7 @@ if ($reviewType == 'user') {
 			echo '
 				<script type="text/javascript">
 					alert("SUCCESS: Review updated.");
-					window.location.href = "profile.php?userID='.$userID.'";
+					window.location.href = "profile.php?userID='.$targetID.'";
 				</script>
 			';
 		}

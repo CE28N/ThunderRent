@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 		echo '
 			<script type="text/javascript">
 				alert("SUCCESS: Message sent");
-				window.location.href = "profile.php?userID='.$_SESSION['userID'].'";
+				window.location.href = "profile.php?userID='.$receiverID.'";
 			</script>
 		';
 	} else {

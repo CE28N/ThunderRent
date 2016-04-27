@@ -17,10 +17,14 @@ if (isset($_POST['submit'])) {
 		$error = 'Error: Username or Password is invalid';
 	} else {
 		if (login($_POST['username'], $_POST['password'])) {
-			if ($_SESSION['userType'] == 'user') {
-				header('location: index.php');
+			if ($_SESSION['userType'] != 'banned') {
+				if ($_SESSION['userType'] == 'user') {
+					header('location: index.php');
+				} else {
+					header('location: admin.php');
+				}
 			} else {
-				header('location: admin.php');
+				$error = 'Error: Account Banned';
 			}
 		} else {
 			$error = 'Error: Wrong Username or Passwords';

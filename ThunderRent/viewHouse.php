@@ -89,7 +89,7 @@ $photoPath = $row['photoPath'];
 				?>
 				<a href="viewHouse.php?&saveHouse=<?php echo $houseID; ?>">Save as interested</a> | 
 				<a href="mailto:?subject=Check this house out: <?php echo $title.' by '.$ownerName; ?>&body=This house looks good: <?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">Mail to friends</a> | 
-				<div class="fb-share-button" data-href="<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" data-layout="button_count" data-mobile-iframe="true"></div>
+				<div class="fb-share-button" data-href="<?php echo $_SERVER['REQUEST_URI']; ?>" data-layout="button_count" data-mobile-iframe="true"></div>
 			</div>
 			<div class="submit"><a href="house.php">Back to house list</a></div>
 		</div>

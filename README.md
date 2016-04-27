@@ -11,17 +11,14 @@ Feature:
  - View and Edit Profile
  - Change Password
  - Host a House For Rent
- - View House For Rent and Releated Feature
  - View House Review
  - Post House Review
  - Save House Ad
  - Mail House Link to Friends
  - Share to Facebook
  - Saved Item
- - User Review
- - Review of Others
+ - Post review of Others
  - View Review of Self
- - Private Message
  - Send Private Message to Others
  - View Private Message to Self
  - Delete Account

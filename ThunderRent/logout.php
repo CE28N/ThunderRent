@@ -1,7 +1,9 @@
 <?php
 require_once('include/functions.php');
+
 session_start();
+logout($_SESSION['userID']);
 session_destroy();
-mysqli_close($connection);
+
 header('location: login.php');
 ?>

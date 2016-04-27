@@ -54,13 +54,12 @@ function login($userName, $userPass) {
 		$row = mysqli_fetch_assoc($query);
 		$dbPass = $row['userPassword'];
 		if (password_verify($userPass, $dbPass)) {
-			if ($row['userType'] != 'banned') {
-				$_SESSION['userID'] = $row['userID'];
-				$_SESSION['userName'] = $userName;
-				$_SESSION['userType'] = $row['userType'];
-				mysqli_close($connection);
-				return true;
-			}
+			mysqli_query($connection, "UPDATE user_account SET userState = 'logged on' WHERE userName = '$userName'");
+			$_SESSION['userID'] = $row['userID'];
+			$_SESSION['userName'] = $userName;
+			$_SESSION['userType'] = $row['userType'];
+			mysqli_close($connection);
+			return true;
 		} else {
 			mysqli_close($connection);
 			return false;
@@ -69,6 +68,17 @@ function login($userName, $userPass) {
 
 	mysqli_close($connection);
 	return false;
+}
+
+function logout($userID) {
+	$connection = connectDB();
+
+	$userName = mysqli_real_escape_string($connection, $userName);
+
+	mysqli_query($connection, "UPDATE user_account SET userState = 'logged off' WHERE userID = '$userID'");
+
+	mysqli_close($connection);
+	return;
 }
 
 function register($userName, $userPass) {
@@ -193,38 +203,6 @@ function updateReview($reviewID, $targetID, $rating, $comment, $type) {
 	return false;
 }
 
-function showDistrict() {
-	return '<select name="district">
-		<option value="Central and Western">Central and Western</option>
-		<option value="Wan Chai">Wan Chai</option>
-		<option value="Eastern">Eastern</option>
-		<option value="Southern">Southern</option>
-		<option value="Yau Tsim Mong">Yau Tsim Mong</option>
-		<option value="Sham Shui Po">Sham Shui Po</option>
-		<option value="Kowloon City">Kowloon City</option>
-		<option value="Wong Tai Sin">Wong Tai Sin</option>
-		<option value="Kwun Tong">Kwun Tong</option>
-		<option value="Kwai Tsing">Kwai Tsing</option>
-		<option value="Tsuen Wan">Tsuen Wan</option>
-		<option value="Tuen Mun">Tuen Mun</option>
-		<option value="Yuen Long">Yuen Long</option>
-		<option value="North">North</option>
-		<option value="Tai Po">Tai Po</option>
-		<option value="Sha Tin">Sha Tin</option>
-		<option value="Sai Kung">Sai Kung</option>
-		<option value="Islands">Islands</option>
-	</select>';
-}
-
-function avgPrice() {
-	$connection = connectDB();
-
-	$query = mysqli_query($connection, "SELECT AVG(price)/AVG(size) AS avg FROM house_profile");
-	$row = mysqli_fetch_assoc($query);
-
-	return round($row['avg'], 2);
-}
-
 function save($userID, $houseID) {
 	$connection = connectDB();
 
@@ -267,5 +245,37 @@ function send($senderID, $receiverID, $title, $message) {
 		mysqli_close($connection);
 		return false;
 	}
+}
+
+function showDistrict() {
+	return '<select name="district">
+		<option value="Central and Western">Central and Western</option>
+		<option value="Wan Chai">Wan Chai</option>
+		<option value="Eastern">Eastern</option>
+		<option value="Southern">Southern</option>
+		<option value="Yau Tsim Mong">Yau Tsim Mong</option>
+		<option value="Sham Shui Po">Sham Shui Po</option>
+		<option value="Kowloon City">Kowloon City</option>
+		<option value="Wong Tai Sin">Wong Tai Sin</option>
+		<option value="Kwun Tong">Kwun Tong</option>
+		<option value="Kwai Tsing">Kwai Tsing</option>
+		<option value="Tsuen Wan">Tsuen Wan</option>
+		<option value="Tuen Mun">Tuen Mun</option>
+		<option value="Yuen Long">Yuen Long</option>
+		<option value="North">North</option>
+		<option value="Tai Po">Tai Po</option>
+		<option value="Sha Tin">Sha Tin</option>
+		<option value="Sai Kung">Sai Kung</option>
+		<option value="Islands">Islands</option>
+	</select>';
+}
+
+function avgPrice() {
+	$connection = connectDB();
+
+	$query = mysqli_query($connection, "SELECT AVG(price)/AVG(size) AS avg FROM house_profile");
+	$row = mysqli_fetch_assoc($query);
+
+	return round($row['avg'], 2);
 }
 ?>

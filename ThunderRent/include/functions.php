@@ -41,6 +41,7 @@ function gen_uuid() {
 	// 48 bits for "node"
 	mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
 	);
+	//This function is the only part of this project which the code is not written by our team
 }
 
 function login($userName, $userPass) {

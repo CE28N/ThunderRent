@@ -48,8 +48,7 @@ if (isset($_POST['submit'])) {
 
 		<div id="delete">
 			<b>Confirm ThunderRent Account Deletion</b><br><br>
-			If you do not think you will ever use ThunderRent again and would like your account deleted, we can take care of this for you.<br>
-			Keep in mind that you will <b>NOT</b> be able to reactivate your account or retrieve any of the content or information you have added.<br>
+			If you do not think you will ever use ThunderRent again and would like your account deleted, we can take care of this for you. Keep in mind that you will <b>NOT</b> be able to reactivate your account or retrieve any of the content or information you have added.<br><br>
 			If you would still like to have your account deleted, enter your password then click "Submit."<br><br>
 
 			<b>Password</b>

@@ -1,0 +1,38 @@
+ThunderRent
+======================
+Version:
+----------------------
+**1.0**
+
+Feature:
+----------------------
+ - Sign Up
+ - Sign In
+ - View and Edit Profile
+ - Change Password
+ - Host a House For Rent
+ - View House For Rent and Releated Feature
+ - View House Review
+ - Post House Review
+ - Save House Ad
+ - Mail House Link to Friends
+ - Share to Facebook
+ - Saved Item
+ - User Review
+ - Review of Others
+ - View Review of Self
+ - Private Message
+ - Send Private Message to Others
+ - View Private Message to Self
+ - Delete Account
+ - (Admin) View logged on user
+ - (Admin) Change user privileges
+ - (Admin) Ban/unban user
+
+Changelog:
+---------------------
+28 Apr, 2016 - Completed version 1.0
+
+Author:
+----------------------
+Created by Ash Chan, Version 1.0 @ 28 Apr, 2016

@@ -131,10 +131,10 @@ function deleteAccount($userID, $userPass) {
 		$dbPass = $row['userPassword'];
 		if (password_verify($userPass, $dbPass)) {
 			mysqli_query($connection, "DELETE FROM user_profile WHERE userID = '$userID'");
-			mysqli_query($connection, "DELETE FROM user_review WHERE userID OR targetID = '$userID'");
+			mysqli_query($connection, "DELETE FROM user_review WHERE userID = '$userID' OR targetID = '$userID'");
 			mysqli_query($connection, "DELETE FROM user_message WHERE senderID = '$userID' OR receiverID = '$userID'");
 			mysqli_query($connection, "DELETE FROM house_profile WHERE ownerID = '$userID'");
-			mysqli_query($connection, "DELETE FROM house_review WHERE userID OR targetID = '$userID'");
+			mysqli_query($connection, "DELETE FROM house_review WHERE userID = '$userID' OR targetID = '$userID'");
 			mysqli_query($connection, "DELETE FROM user_account WHERE userID = '$userID'");
 
 			$query = mysqli_query($connection, "SELECT COUNT(*) AS count FROM user_profile");

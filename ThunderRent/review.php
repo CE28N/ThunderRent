@@ -44,8 +44,13 @@ checkSession();
 			} else {
 				echo '0 results';
 			}
+
+			if ($reviewType == 'user') {
+				echo '<div class="submit"><a href="profile.php?userID='.$targetID.'">Back to profile</a></div>';
+			} else {
+				echo '<div class="submit"><a href="viewHouse.php?houseID='.$targetID.'">Back to house</a></div>';
+			}
 			?>
-			<div class="submit"><a href="viewHouse.php?houseID=<?php echo $targetID; ?>">Back to house</a></div>
 		</div>
 	</div>
 </body>

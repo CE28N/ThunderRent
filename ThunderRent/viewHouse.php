@@ -74,7 +74,11 @@ $photoPath = $row['photoPath'];
 			?>
 			<div class="link">
 				<a href="review.php?type=house&targetID=<?php echo $houseID; ?>">View review</a> | 
-				<a href="postReview.php?type=house&targetID=<?php echo $houseID; ?>">Submit review</a> | 
+				<?php
+					if ($ownerName != $_SESSION['userName']) {
+						echo '<a href="postReview.php?type=house&targetID='.$houseID.'">Submit review</a> | ';
+					}
+				?>
 				<a href="viewHouse.php?&saveHouse=<?php echo $houseID; ?>">Save as interested</a> | 
 				<a href="mailto:?subject=Check this house out: <?php echo $title.' by '.$ownerName; ?>&body=This house looks good: <?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">Mail to friends</a>
 			</div>

@@ -48,9 +48,9 @@ if (!isset($_SESSION['userName'])) {
 				echo '<div class="link">Number of active user: <b>'.$row['count'].'</b></div>';
 
 				$query = mysqli_query($connection, "SELECT userID, userName, userType, userState FROM user_account WHERE userState = 'logged on'");
-				echo '<table><tr><th>User</th><th>User Type</th><th>User State</th><th>Link</th></tr>';
+				echo '<table><tr><th>User</th><th>User Type</th><th>User State</th></tr>';
 				while($row = mysqli_fetch_assoc($query)) {
-					echo '<tr><td>'.$row['userName'].'</td><td>'.$row['userType'].'</td><td>'.$row['userState'].'</td><td><a href="profile.php?userID='.$row['userID'].'">View</a></td></tr>';
+					echo '<tr><td>'.$row['userName'].'</td><td>'.$row['userType'].'</td><td>'.$row['userState'].'</td></tr>';
 				}
 				echo '</table>';
 

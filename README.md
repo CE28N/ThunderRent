@@ -4,7 +4,7 @@ Version:
 ----------------------
 **1.0**
 
-Feature:
+Features:
 ----------------------
  - Sign Up
  - Sign In
@@ -29,6 +29,7 @@ Feature:
 Changelog:
 ---------------------
 28 Apr, 2016 - Completed version 1.0
+30 Apr, 2016 - Added empty form check at host.php
 
 Author:
 ----------------------

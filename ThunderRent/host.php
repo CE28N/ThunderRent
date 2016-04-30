@@ -27,73 +27,82 @@ $photoPath = $row['photoPath'];
 if (mysqli_num_rows($query) == 0) {
 	$ownerID = '';
 	if (isset($_POST['submit'])){
-		$ownerID = $_SESSION['userID'];
-		$title = mysqli_real_escape_string($connection, $_POST['title']);
-		$district = mysqli_real_escape_string($connection, $_POST['district']);
-		$price = mysqli_real_escape_string($connection, $_POST['price']);
-		$size = mysqli_real_escape_string($connection, $_POST['size']);
-		$detail = mysqli_real_escape_string($connection, $_POST['detail']);
+		if (empty($_POST['title']) || empty($_POST['price']) || empty($_POST['size'])) {
+			echo '
+				<script type="text/javascript">
+					alert("Error: Please provide title, price and size of the house");
+					window.location.href = "host.php";
+				</script>
+			';
+		} else {
+			$ownerID = $_SESSION['userID'];
+			$title = mysqli_real_escape_string($connection, $_POST['title']);
+			$district = mysqli_real_escape_string($connection, $_POST['district']);
+			$price = mysqli_real_escape_string($connection, $_POST['price']);
+			$size = mysqli_real_escape_string($connection, $_POST['size']);
+			$detail = mysqli_real_escape_string($connection, $_POST['detail']);
 
-		if (isset($_FILES['photoPath']) && $_FILES['photoPath']['error'] != UPLOAD_ERR_NO_FILE) {
-			$image_name = $_FILES['photoPath']['name'];
-			$image_size = $_FILES['photoPath']['size'];
-			$image_type = pathinfo($image_name,PATHINFO_EXTENSION);
+			if (isset($_FILES['photoPath']) && $_FILES['photoPath']['error'] != UPLOAD_ERR_NO_FILE) {
+				$image_name = $_FILES['photoPath']['name'];
+				$image_size = $_FILES['photoPath']['size'];
+				$image_type = pathinfo($image_name,PATHINFO_EXTENSION);
 
-			$image_dir = 'include/img/house/';
-			$status = 1;
+				$image_dir = 'include/img/house/';
+				$status = 1;
 
-			//Check if empty
-			if ($image_name == '' || $image_size == 0) {
-				echo '<script>alert("Error: File is empty")</script>';
-				$status = 0;
-			}
-			//Allow certain file formats
-			if ($image_type != 'bmp' && $image_type != 'jpg' && $image_type != 'jpeg' && $image_type != 'png') {
-				echo '<script>alert("Error: Only .bmp, .jpg, .jpeg and .png are accepted")</script>';
-				$status = 0;
-			}
+				//Check if empty
+				if ($image_name == '' || $image_size == 0) {
+					echo '<script>alert("Error: File is empty")</script>';
+					$status = 0;
+				}
+				//Allow certain file formats
+				if ($image_type != 'bmp' && $image_type != 'jpg' && $image_type != 'jpeg' && $image_type != 'png') {
+					echo '<script>alert("Error: Only .bmp, .jpg, .jpeg and .png are accepted")</script>';
+					$status = 0;
+				}
 
-			//Upload if no error
-			if($status == 1){
-				//Rename image with UUID
-				$uuid = gen_uuid();
-				$image_tmp = $_FILES['photoPath']['tmp_name'];
+				//Upload if no error
+				if($status == 1){
+					//Rename image with UUID
+					$uuid = gen_uuid();
+					$image_tmp = $_FILES['photoPath']['tmp_name'];
 
-				if (move_uploaded_file($image_tmp,"include/img/house/$uuid.$image_type")) {
-					echo '<script>alert("SUCCESS: Image updated")</script>';
+					if (move_uploaded_file($image_tmp,"include/img/house/$uuid.$image_type")) {
+						echo '<script>alert("SUCCESS: Image updated")</script>';
 
-					$photoPath = 'include/img/house/'.$uuid.'.'.$image_type;
+						$photoPath = 'include/img/house/'.$uuid.'.'.$image_type;
+					} else {
+						echo '<script>alert("Error: Please contact server admin")';
+					}
 				} else {
-					echo '<script>alert("Error: Please contact server admin")';
+					$photoPath = NULL;
 				}
 			} else {
 				$photoPath = NULL;
 			}
-		} else {
-			$photoPath = NULL;
-		}
 
-		if ($photoPath == NULL) {
-			if (mysqli_query($connection, "INSERT INTO house_profile (ownerID, title, district, price, size, detail) VALUES ('$ownerID', '$title', '$district', '$price', '$size', '$detail')")) {
-				echo '
-					<script type="text/javascript">
-						alert("SUCCESS: Ads posted");
-						window.location.href = "";
-					</script>
-				';
+			if ($photoPath == NULL) {
+				if (mysqli_query($connection, "INSERT INTO house_profile (ownerID, title, district, price, size, detail) VALUES ('$ownerID', '$title', '$district', '$price', '$size', '$detail')")) {
+					echo '
+						<script type="text/javascript">
+							alert("SUCCESS: Ads posted");
+							window.location.href = "";
+						</script>
+					';
+				} else {
+					echo "<script>alert('Error: Please contact server admin')";
+				}
 			} else {
-				echo "<script>alert('Error: Please contact server admin')";
-			}
-		} else {
-			if (mysqli_query($connection, "INSERT INTO house_profile (ownerID, title, district, price, size, detail, photoPath) VALUES ('$ownerID', '$title', '$district', '$price', '$size', '$detail', '$photoPath')")) {
-				echo '
-					<script type="text/javascript">
-						alert("SUCCESS: Ads posted");
-						window.location.href = "";
-					</script>
-				';
-			} else {
-				echo '<script>alert("Error: Please contact server admin")';
+				if (mysqli_query($connection, "INSERT INTO house_profile (ownerID, title, district, price, size, detail, photoPath) VALUES ('$ownerID', '$title', '$district', '$price', '$size', '$detail', '$photoPath')")) {
+					echo '
+						<script type="text/javascript">
+							alert("SUCCESS: Ads posted");
+							window.location.href = "";
+						</script>
+					';
+				} else {
+					echo '<script>alert("Error: Please contact server admin")';
+				}
 			}
 		}
 	}
